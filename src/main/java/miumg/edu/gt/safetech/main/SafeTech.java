@@ -10,7 +10,7 @@ package miumg.edu.gt.safetech.main;
  */
 public class SafeTech {
     public static void main(String[] args) {
-         System.out.println(" vj git");
+         System.out.println(" vjimenez");
     }
     
 }
