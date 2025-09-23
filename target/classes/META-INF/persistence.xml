@@ -2,21 +2,21 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="miumg.edu.gt_SafeTech_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>miumg.edu.gt.safetech.dbo.controller.Usuario</class>
-    <class>miumg.edu.gt.safetech.dbo.controller.Rol</class>
-    <class>miumg.edu.gt.safetech.dbo.controller.Cliente</class>
-    <class>miumg.edu.gt.safetech.dbo.controller.PlanServicio</class>
-    <class>miumg.edu.gt.safetech.dbo.controller.Agente</class>
-    <class>miumg.edu.gt.safetech.dbo.controller.PlanAgente</class>
-    <class>miumg.edu.gt.safetech.dbo.controller.Detalle</class>
-    <class>miumg.edu.gt.safetech.dbo.controller.Factura</class>
-    <class>miumg.edu.gt.safetech.dbo.controller.Servicio</class>
-    <class>miumg.edu.gt.safetech.dbo.controller.Sysdiagrams</class>
+    <class>miumg.edu.gt.safetech.controller.Usuario</class>
+    <class>miumg.edu.gt.safetech.controller.Rol</class>
+    <class>miumg.edu.gt.safetech.controller.Cliente</class>
+    <class>miumg.edu.gt.safetech.controller.PlanServicio</class>
+    <class>miumg.edu.gt.safetech.controller.Agente</class>
+    <class>miumg.edu.gt.safetech.controller.PlanAgente</class>
+    <class>miumg.edu.gt.safetech.controller.Detalle</class>
+    <class>miumg.edu.gt.safetech.controller.Factura</class>
+    <class>miumg.edu.gt.safetech.controller.Servicio</class>
+    <class>miumg.edu.gt.safetech.controller.Sysdiagrams</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost\SafeTech:1433;databaseName=SafeTech;trustServercertificate=true"/>
-      <property name="javax.persistence.jdbc.user" value="ADMIN"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://192.168.1.82\SafeTech:1433;databaseName=SafeTech;encrypt=false"/>
+      <property name="javax.persistence.jdbc.user" value="sa"/>
       <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-      <property name="javax.persistence.jdbc.password" value="ADMIN1234"/>
+      <property name="javax.persistence.jdbc.password" value="1565.edu"/>
     </properties>
   </persistence-unit>
 </persistence>

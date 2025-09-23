@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import miumg.edu.gt.safetech.controller.Factura;
 import miumg.edu.gt.safetech.controller.Servicio;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2025-09-19T20:02:09", comments="EclipseLink-2.7.10.v20211216-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2025-09-22T22:57:47", comments="EclipseLink-2.7.10.v20211216-rNA")
 @StaticMetamodel(Detalle.class)
 public class Detalle_ { 
 

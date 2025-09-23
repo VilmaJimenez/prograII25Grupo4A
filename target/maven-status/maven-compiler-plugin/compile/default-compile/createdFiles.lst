@@ -8,6 +8,7 @@ miumg\edu\gt\safetech\dbo\PlanAgenteJpaController.class
 miumg\edu\gt\safetech\controller\Cliente_.class
 miumg\edu\gt\safetech\controller\Rol.class
 miumg\edu\gt\safetech\controller\PlanAgente_.class
+miumg\edu\gt\safetech\dbo\Servicio\ServicioLogin.class
 miumg\edu\gt\safetech\dbo\PlanServicioJpaController.class
 miumg\edu\gt\safetech\exceptions\PreexistingEntityException.class
 miumg\edu\gt\safetech\dbo\FacturaJpaController.class
