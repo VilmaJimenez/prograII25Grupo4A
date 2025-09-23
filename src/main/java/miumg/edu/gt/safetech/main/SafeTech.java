@@ -1,16 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package miumg.edu.gt.safetech.main;
 
-/**
- *
- * @author Julissa
- */
+import java.util.Scanner;
+
 public class SafeTech {
+    
+    private static Scanner es = new Scanner(System.in);
+    
     public static void main(String[] args) {
-         System.out.println(" vjimenez");
+       safeTechApp();
+    }
+    
+    
+    public static void safeTechApp(){
+        
+        System.out.println("\n**********Bienvenido a SAFETECH!! Su Empresa de Seguridad**********");
+        System.out.println("\n\n");
+        System.out.println("Para acceder ingrese sus credenciales:");
+        System.out.print("Usuario: ");
+        String user = es.next();
+        System.out.print("Password: ");
+        
     }
     
 }
