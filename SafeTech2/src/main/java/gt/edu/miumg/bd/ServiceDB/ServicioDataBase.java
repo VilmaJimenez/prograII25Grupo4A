@@ -71,6 +71,54 @@ public class ServicioDataBase {
        }
        
    }
+   
+   public void modificarServicio(Scanner es){
+       es.nextLine();
+       System.out.println("Ingrese el ID del Servicio a Modificar: ");
+       int id = Integer.parseInt(es.nextLine());
+       Servicio ser = serviceJPA.findServicio(id);
+       if (ser == null) {
+           System.out.println("El Servicio no existe en la base de datos");
+       }else{
+           mostrarUno(ser);
+           System.out.println("\nIngrese los nuevos valores para el Servicio");
+           System.out.print("Descripcion : ");
+            String desc = es.nextLine();
+            ser.setDescripcion(desc);
+            //es.nextLine();
+    
+            boolean valido = false;
+            BigDecimal precio = null;
+
+    while (!valido) {
+        System.out.print("Ingrese un precio: ");
+        String precioStr = es.nextLine().trim();
+        try {
+            precio = new BigDecimal(precioStr);
+            valido = true;
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Debe ingresar un número válido (ejemplo: 250.75).");
+        }
+    }
+
+            ser.setPrecio(precio);
+           try {
+               serviceJPA.edit(ser);
+               System.out.println("Servicio Modificado Exitosamente");
+           } catch (Exception e) {
+               System.out.println("A ocurrido un error");
+           }
+       }
+       
+   }
+   
+   public void mostrarUno(Servicio ser){
+       System.out.println("ID Servicio: "+ ser.getIdServicio());
+       System.out.println("Descripcion: "+ ser.getDescripcion());
+       System.out.println("Precio: "+ ser.getPrecio());
+       System.out.println("**************************");
+       
+   }
 
    
 }
