@@ -73,6 +73,7 @@ public class ServicioJpaController implements Serializable {
                 }
             }
             em.getTransaction().commit();
+            
         } finally {
             if (em != null) {
                 em.close();

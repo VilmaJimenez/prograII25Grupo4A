@@ -12,7 +12,8 @@
     <class>gt.edu.miumg.bd.Factura</class>
     <class>gt.edu.miumg.bd.Servicio</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=SafeTechProd;encrypt=false"/>
+      <!-- <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=SafeTechProd;encrypt=false"/> -->
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://192.168.1.74:1433;databaseName=SafeTechProd;encrypt=false"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>
       <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
       <property name="javax.persistence.jdbc.password" value="1565.edu"/>

@@ -27,6 +27,7 @@ gt\edu\miumg\bd\Usuario_.class
 gt\edu\miumg\bd\Cliente.class
 gt\edu\miumg\bd\Cliente_.class
 gt\edu\miumg\bd\ServiceDB\ServiceLog.class
+gt\edu\miumg\bd\ServiceDB\ServicioDataBase.class
 gt\edu\miumg\bd\Detalle_.class
 gt\edu\miumg\bd\Usuario.class
 gt\edu\miumg\bd\RolJpaController.class
