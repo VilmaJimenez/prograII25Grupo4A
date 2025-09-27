@@ -90,8 +90,12 @@ public class SafeTech2 {
                 svDB.eliminarServicio(es);
                 break;
             case 3:
+                System.out.println("\n***Modificar Servicio***");
+                svDB.modificarServicio(es);
                 break;
             case 4:
+                System.out.println("\n***Ver Servicios***");
+                svDB.mostrarServicios();
                 break;
         }
     }
