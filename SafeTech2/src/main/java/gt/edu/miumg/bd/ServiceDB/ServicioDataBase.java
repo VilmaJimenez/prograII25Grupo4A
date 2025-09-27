@@ -25,7 +25,7 @@ public class ServicioDataBase {
     
     boolean valido = false;
     BigDecimal precio = null;
-
+    
     while (!valido) {
         System.out.print("Ingrese un precio: ");
         String precioStr = es.nextLine().trim();
@@ -51,7 +51,7 @@ public class ServicioDataBase {
            for (Servicio ser: listaServicios) {
                System.out.println("ID Servicio: "+ ser.getIdServicio());
                System.out.println("Descripcion: "+ ser.getDescripcion());
-               System.out.println("Precio: "+ ser.getPrecio());
+               System.out.println("Precio:  "+ ser.getPrecio());
                System.out.println("**************************");
            }
        }
