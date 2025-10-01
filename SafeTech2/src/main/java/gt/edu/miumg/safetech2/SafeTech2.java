@@ -4,6 +4,7 @@
 
 package gt.edu.miumg.safetech2;
 
+import gt.edu.miumg.bd.Cliente;
 import gt.edu.miumg.bd.ServiceDB.ServiceLog;
 import gt.edu.miumg.bd.ServiceDB.ServicioDataBase;
 import gt.edu.miumg.bd.Servicio;
@@ -59,6 +60,8 @@ public class SafeTech2 {
         es.nextLine();
         System.out.println("\n***** MENU *****");
         System.out.println("1. Mantenimiento de Servicios");
+        System.out.println("2. Mantenimietno de Clientes");
+        System.out.println("3. Manejo de Planes");
         System.out.print("Seleccione una opcion: ");
         int op = es.nextInt();
         return op;
@@ -69,6 +72,16 @@ public class SafeTech2 {
             case 1:
                 subMenuServicio();
                 break;
+            case 2:
+                subMenuClientes();
+                break;
+            case 3:
+                subMenuPlanes();
+                break;
+            default:
+                System.out.println("Numero incorrecto");
+                
+                
         }
     }
     public static void subMenuServicio() throws NonexistentEntityException{
@@ -77,6 +90,7 @@ public class SafeTech2 {
         System.out.println("2. Eliminar Servicio");
         System.out.println("3. Modificar Servicio");
         System.out.println("4. Ver Servicios");
+        System.out.println("");
         System.out.print("Seleccione una Opcion: ");
         int op = es.nextInt();
         switch(op){
@@ -97,6 +111,61 @@ public class SafeTech2 {
                 System.out.println("\n***Ver Servicios***");
                 svDB.mostrarServicios();
                 break;
+                
+        }
+    }
+    
+    public static void subMenuClientes(){
+        es.nextLine();
+        System.out.println("\n1. Crear Cliente");
+        System.out.println("2. Eliminar Cliente");
+        System.out.println("3. Modificar Cliente");
+        System.out.println("4. Ver Clientes");
+        System.out.print("Seleccione una Opcion: ");
+        int op = es.nextInt();
+        
+        switch (op) {
+            case 1:
+                System.out.println("***** Crear Cliente *****");
+                Cliente cliente = new Cliente();
+                svDB.crearCliente(es, cliente);
+                break;
+            case 2:
+                System.out.println("***** Eliminar Cliente *****");
+                svDB.eliminarCliente(es);
+                break;
+            case 3:
+                System.out.println("***** Modificar Cliente *****");
+                svDB.modificarCliente(es);
+                break;
+            case 4:
+                System.out.println("***** Ver Todos los Clientes *****");
+                svDB.mostrarClientes();
+                break;
+            default:
+                System.out.println("Numero no valido");
+        }
+    }
+    
+    public static void subMenuPlanes(){
+        es.nextLine();
+        System.out.println("\n1. Crear Plan ");
+        System.out.println("2. Eliminar Plan");
+        System.out.println("3. Modificar Plan");
+        System.out.println("4. Ver Planes");
+        System.out.print("Seleccione una Opcion: ");
+        int op = es.nextInt();
+        
+        switch (op) {
+            case 1:
+                System.out.println("\n***** Crear un Plan *****");
+                svDB.crearPlanServicio(es);
+                break;
+            case 2:
+                break;
+            default:
+                System.out.println("Numero incorrecto");
+        
         }
     }
     
