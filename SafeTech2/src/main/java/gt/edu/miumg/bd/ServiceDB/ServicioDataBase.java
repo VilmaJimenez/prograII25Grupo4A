@@ -1,6 +1,7 @@
 
 package gt.edu.miumg.bd.ServiceDB;
 
+import gt.edu.miumg.bd.Agente;
 import gt.edu.miumg.bd.Servicio;
 import gt.edu.miumg.bd.ServicioJpaController;
 import gt.edu.miumg.bd.exceptions.NonexistentEntityException;
@@ -66,7 +67,7 @@ public class ServicioDataBase {
        try {
            serviceJPA.destroy(id);
            System.out.println("El Servicio "+ id+ " ha sido elimiado");
-       } catch (Exception e) {
+       } catch (NonexistentEntityException e) {
            System.out.println("Error al ingresar el ID");
        }
        
@@ -118,7 +119,4 @@ public class ServicioDataBase {
        System.out.println("Precio: "+ ser.getPrecio());
        System.out.println("**************************");
        
-   }
-
-   
-}
+   }}
