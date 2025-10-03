@@ -1,4 +1,3 @@
-
 package gt.edu.miumg.safetech2;
 
 import gt.edu.miumg.bd.Agente;
@@ -6,6 +5,7 @@ import gt.edu.miumg.bd.AgentesDB.AgentesDataBase;
 import gt.edu.miumg.bd.AgentesDB.RolDataBase;
 import gt.edu.miumg.bd.AgentesDB.UsuarioDataBase;
 import gt.edu.miumg.bd.Cliente;
+import gt.edu.miumg.bd.Rol;
 import gt.edu.miumg.bd.ServiceDB.ServiceLog;
 import gt.edu.miumg.bd.ServiceDB.ServicioDataBase;
 import gt.edu.miumg.bd.Servicio;
@@ -21,6 +21,7 @@ public class SafeTech2 {
     static AgentesDataBase agDB = new AgentesDataBase();
     static UsuarioDataBase usDB = new UsuarioDataBase();
     static RolDataBase rolDB = new RolDataBase();
+    static Rol logu = new Rol();
 
     public static void main(String[] args) throws NonexistentEntityException {
         safeTechApp();
@@ -32,43 +33,66 @@ public class SafeTech2 {
         if (ingreso) {
             while (!salir) {
                 int op = menu();
-                salir = subMenu(op); 
+                salir = subMenu(op);
             }
         }
     }
 
     public static boolean login() {
+        boolean val = false;
         System.out.println("\n**********Bienvenido a SAFETECH!! Su Empresa de Seguridad**********");
         System.out.println("\n\n");
         System.out.println("Para acceder ingrese sus credenciales:");
-        System.out.print("Usuario: ");
-        int user = Integer.parseInt(es.nextLine());
-        System.out.print("Password: ");
-        String pass = es.next();
+        while (!val) {
+            System.out.print("Usuario: ");
+            String user = es.next();
+            System.out.print("Password: ");
+            String pass = es.next();
 
-        Usuario logueo = login.login(user, pass);
+            var logueo = login.login(user, pass);
 
-        if (logueo == null) {
-            System.out.println("Credenciales Invalidas");
-            return false;
-        } else {
-            System.out.println("\nUsuario Correcto");
+            if (logueo == null) {
+                System.out.println("\nCredenciales Invalidas, intente nuevamente");
+                //val = false;
+                //return false;
+            } else {
+                System.out.println("\nUsuario Correcto");
+                logu = logueo.getIdRol();
+                // System.out.println(logueo.getIdRol()+"    5555555555555555555555555555555");
+                //log.getIdRol();
+                return true;
+
+            }
+
         }
-        return true;
+
+        return false;
     }
 
     public static int menu() {
-        System.out.println("\n***** MENU *****");
-        System.out.println("1. Mantenimiento de Servicios");
-        System.out.println("2. Mantenimiento de Clientes");
-        System.out.println("3. Manejo de Planes");
-        System.out.println("4.  Agentes");
-        System.out.println("5. Usuario");
-        System.out.println("6. Rol");
 
-        System.out.println("7. Salir");
-        System.out.print("Seleccione una opcion: ");
-        return es.nextInt();
+        if (logu.getIdRol().equals(2)) {
+            
+            System.out.println("\n***** MENU *****");
+            System.out.println("\nPermisos de Ventas:");
+            System.out.println("3. Manejo de Planes");
+            System.out.print("Seleccione una opcion: ");
+            return es.nextInt();
+        } else {
+
+            System.out.println("\n***** MENU *****");
+            System.out.println("\nPermisos de Administrador:");
+            System.out.println("1. Mantenimiento de Servicios");
+            System.out.println("2. Mantenimiento de Clientes");
+            System.out.println("3. Manejo de Planes");
+            System.out.println("4. Agentes");
+            System.out.println("5. Usuario");
+            System.out.println("6. Rol");
+            System.out.println("7. Salir");
+            System.out.print("Seleccione una opcion: ");
+            return es.nextInt();
+        }
+
     }
 
     public static boolean subMenu(int op) throws NonexistentEntityException {

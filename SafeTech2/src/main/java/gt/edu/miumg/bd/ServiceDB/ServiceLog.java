@@ -1,6 +1,7 @@
 
 package gt.edu.miumg.bd.ServiceDB;
 
+import gt.edu.miumg.bd.Rol;
 import gt.edu.miumg.bd.Usuario;
 import gt.edu.miumg.bd.UsuarioJpaController;
 import java.util.List;
@@ -15,10 +16,11 @@ public class ServiceLog {
     UsuarioJpaController userControl = new UsuarioJpaController(emf);
     
     
-    public Usuario login(int user, String password){
+    public Usuario login(String user, String password){
         List<Usuario> usuarios = userControl.findUsuarioEntities();
         for(Usuario us : usuarios){
-            if (us.getIdUsuario().equals(user) && us.getContraseña().equals(password)) {
+            if (us.getNombre().equals(user) && us.getContraseña().equals(password)) {
+                //Usuario us = us.getIdRol();
                 return us;
             }
             
