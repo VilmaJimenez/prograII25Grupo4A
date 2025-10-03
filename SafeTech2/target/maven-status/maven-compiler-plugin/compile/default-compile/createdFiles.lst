@@ -1,3 +1,4 @@
+gt\edu\miumg\bd\AgentesDB\AgentesDataBase.class
 gt\edu\miumg\safetech2\SafeTech2.class
 gt\edu\miumg\bd\UsuarioJpaController.class
 gt\edu\miumg\bd\Detalle.class
@@ -5,6 +6,7 @@ gt\edu\miumg\bd\PlanAgente.class
 gt\edu\miumg\bd\Agente.class
 gt\edu\miumg\bd\exceptions\PreexistingEntityException.class
 gt\edu\miumg\bd\ClienteJpaController.class
+gt\edu\miumg\bd\AgentesDB\UsuarioDataBase.class
 gt\edu\miumg\bd\FacturaJpaController.class
 gt\edu\miumg\bd\Factura_.class
 gt\edu\miumg\bd\Rol_.class
@@ -13,6 +15,7 @@ gt\edu\miumg\bd\AgenteJpaController.class
 gt\edu\miumg\bd\ServicioJpaController.class
 gt\edu\miumg\bd\Factura.class
 gt\edu\miumg\bd\PlanServicioJpaController.class
+gt\edu\miumg\bd\AgentesDB\RolDataBase.class
 gt\edu\miumg\bd\PlanServicio.class
 gt\edu\miumg\bd\DetalleJpaController.class
 gt\edu\miumg\bd\Servicio.class
