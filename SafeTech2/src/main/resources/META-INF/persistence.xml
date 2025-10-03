@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="gt.edu.miumg_SafeTech2_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>gt.edu.miumg.bd.PlanServicio</class>
+    <class>gt.edu.miumg.bd.Cliente</class>
+    <class>gt.edu.miumg.bd.PlanAgente</class>
+    <class>gt.edu.miumg.bd.Agente</class>
+    <class>gt.edu.miumg.bd.Rol</class>
+    <class>gt.edu.miumg.bd.Usuario</class>
+    <class>gt.edu.miumg.bd.Detalle</class>
+    <class>gt.edu.miumg.bd.Factura</class>
+    <class>gt.edu.miumg.bd.Servicio</class>
+    <properties>
+      <!-- <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=SafeTechProd;encrypt=false"/> -->
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://192.168.1.74:1433;databaseName=SafeTechProd;encrypt=false"/>
+      <property name="javax.persistence.jdbc.user" value="sa"/>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="javax.persistence.jdbc.password" value="1565.edu"/>
+    </properties>
+  </persistence-unit>
+</persistence>
