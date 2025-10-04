@@ -28,6 +28,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "PlanAgente.findAll", query = "SELECT p FROM PlanAgente p")})
 public class PlanAgente implements Serializable {
 
+
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,7 +83,7 @@ public class PlanAgente implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+
         if (!(object instanceof PlanAgente)) {
             return false;
         }

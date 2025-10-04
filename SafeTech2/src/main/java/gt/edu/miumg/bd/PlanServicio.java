@@ -32,43 +32,37 @@ import javax.persistence.Table;
 public class PlanServicio implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
+    
+    
+    
+     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idPlan", nullable = false)
     private Integer idPlan;
+
     @Basic(optional = false)
     @Column(name = "nombrePlan", nullable = false, length = 100)
     private String nombrePlan;
+
     @Basic(optional = false)
     @Column(name = "descripcion", nullable = false, length = 300)
     private String descripcion;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+
     @Basic(optional = false)
     @Column(name = "precio", nullable = false, precision = 10, scale = 2)
     private BigDecimal precio;
+
     @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Cliente idCliente;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idServicio", referencedColumnName = "idServicio")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Servicio idServicio;
-    @OneToMany(mappedBy = "idPlan", fetch = FetchType.LAZY)
+    private Servicio servicio;
+
+    @OneToMany(mappedBy = "idPlan", fetch = FetchType.EAGER)
     private List<PlanAgente> planAgenteList;
-
-    public PlanServicio() {
-    }
-
-    public PlanServicio(Integer idPlan) {
-        this.idPlan = idPlan;
-    }
-
-    public PlanServicio(Integer idPlan, String nombrePlan, String descripcion, BigDecimal precio) {
-        this.idPlan = idPlan;
-        this.nombrePlan = nombrePlan;
-        this.descripcion = descripcion;
-        this.precio = precio;
-    }
 
     public Integer getIdPlan() {
         return idPlan;
@@ -110,12 +104,12 @@ public class PlanServicio implements Serializable {
         this.idCliente = idCliente;
     }
 
-    public Servicio getIdServicio() {
-        return idServicio;
+    public Servicio getServicio() {
+        return servicio;
     }
 
-    public void setIdServicio(Servicio idServicio) {
-        this.idServicio = idServicio;
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
     }
 
     public List<PlanAgente> getPlanAgenteList() {
@@ -128,22 +122,16 @@ public class PlanServicio implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idPlan != null ? idPlan.hashCode() : 0);
-        return hash;
+        return idPlan != null ? idPlan.hashCode() : 0;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof PlanServicio)) {
             return false;
         }
         PlanServicio other = (PlanServicio) object;
-        if ((this.idPlan == null && other.idPlan != null) || (this.idPlan != null && !this.idPlan.equals(other.idPlan))) {
-            return false;
-        }
-        return true;
+        return (this.idPlan != null && this.idPlan.equals(other.idPlan));
     }
 
     @Override

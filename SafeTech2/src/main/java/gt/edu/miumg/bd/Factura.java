@@ -6,9 +6,11 @@ package gt.edu.miumg.bd;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,7 +35,8 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f")})
 public class Factura implements Serializable {
-
+    
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,20 +45,22 @@ public class Factura implements Serializable {
     private Integer idFactura;
     @Basic(optional = false)
     @Column(name = "fecha", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+
     @Basic(optional = false)
     @Column(name = "total", nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
-    @OneToMany(mappedBy = "idFactura", fetch = FetchType.LAZY)
-    private List<Detalle> detalleList;
+    @OneToMany(mappedBy = "idFactura", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Detalle> detalleList = new ArrayList<>();
+
+    public Factura() {
+        this.detalleList = new ArrayList<>();
+    }
+
     @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
     @ManyToOne(fetch = FetchType.LAZY)
     private Cliente idCliente;
-
-    public Factura() {
-    }
 
     public Factura(Integer idFactura) {
         this.idFactura = idFactura;
@@ -116,7 +121,7 @@ public class Factura implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+
         if (!(object instanceof Factura)) {
             return false;
         }

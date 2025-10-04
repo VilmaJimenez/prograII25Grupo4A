@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -21,6 +22,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class FacturaJpaController implements Serializable {
 
+
+    
     public FacturaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -167,7 +170,16 @@ public class FacturaJpaController implements Serializable {
     }
 
     public List<Factura> findFacturaEntities() {
-        return findFacturaEntities(true, -1, -1);
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Factura> query = em.createQuery(
+                    "SELECT DISTINCT f FROM Factura f LEFT JOIN FETCH f.detalleList d LEFT JOIN FETCH d.idServicio LEFT JOIN FETCH d.idPlan",
+                    Factura.class
+            );
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
     }
 
     public List<Factura> findFacturaEntities(int maxResults, int firstResult) {

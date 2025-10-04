@@ -29,21 +29,27 @@ import javax.persistence.Table;
     @NamedQuery(name = "Servicio.findAll", query = "SELECT s FROM Servicio s")})
 public class Servicio implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  
+    
+        private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idServicio", nullable = false)
     private Integer idServicio;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+
     @Basic(optional = false)
     @Column(name = "precio", nullable = false, precision = 10, scale = 2)
     private BigDecimal precio;
+
     @Basic(optional = false)
     @Column(name = "descripcion", nullable = false, length = 300)
     private String descripcion;
-    @OneToMany(mappedBy = "idServicio", fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "servicio", fetch = FetchType.LAZY)
     private List<PlanServicio> planServicioList;
+
     @OneToMany(mappedBy = "idServicio", fetch = FetchType.LAZY)
     private List<Detalle> detalleList;
 
@@ -102,22 +108,16 @@ public class Servicio implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idServicio != null ? idServicio.hashCode() : 0);
-        return hash;
+        return idServicio != null ? idServicio.hashCode() : 0;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Servicio)) {
             return false;
         }
         Servicio other = (Servicio) object;
-        if ((this.idServicio == null && other.idServicio != null) || (this.idServicio != null && !this.idServicio.equals(other.idServicio))) {
-            return false;
-        }
-        return true;
+        return (this.idServicio != null && this.idServicio.equals(other.idServicio));
     }
 
     @Override

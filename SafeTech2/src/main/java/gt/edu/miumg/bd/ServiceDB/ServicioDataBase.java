@@ -253,7 +253,7 @@ public class ServicioDataBase {
     }
 
     //Planes 
-    public void crearPlanServicio(Scanner s) {
+    /*public void crearPlanServicio(Scanner s) {
         boolean val = false;
         int id;
         Cliente cli = null;
@@ -304,6 +304,6 @@ public class ServicioDataBase {
             System.out.println("Ah ocurrido un error");
         }
 
-    }
+    }*/
 
 }

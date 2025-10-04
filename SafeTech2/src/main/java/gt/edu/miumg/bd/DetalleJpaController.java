@@ -20,7 +20,9 @@ import javax.persistence.criteria.Root;
  */
 public class DetalleJpaController implements Serializable {
 
-    public DetalleJpaController(EntityManagerFactory emf) {
+   
+    
+     public DetalleJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -185,6 +187,24 @@ public class DetalleJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Detalle> findDetalleByFactura(Factura factura) {
+        return getEntityManager()
+                .createQuery("SELECT d FROM Detalle d WHERE d.idFactura.idFactura = :facturaId", Detalle.class)
+                .setParameter("facturaId", factura.getIdFactura())
+                .getResultList();
+    }
+
+    public List<Detalle> findDetalleByFactura(Integer idFactura) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.createQuery("SELECT d FROM Detalle d WHERE d.idFactura.idFactura = :id", Detalle.class)
+                    .setParameter("id", idFactura)
+                    .getResultList();
         } finally {
             em.close();
         }

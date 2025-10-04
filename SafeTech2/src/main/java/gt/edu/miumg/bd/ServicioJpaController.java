@@ -21,6 +21,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class ServicioJpaController implements Serializable {
 
+
+    
     public ServicioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -55,8 +57,8 @@ public class ServicioJpaController implements Serializable {
             servicio.setDetalleList(attachedDetalleList);
             em.persist(servicio);
             for (PlanServicio planServicioListPlanServicio : servicio.getPlanServicioList()) {
-                Servicio oldIdServicioOfPlanServicioListPlanServicio = planServicioListPlanServicio.getIdServicio();
-                planServicioListPlanServicio.setIdServicio(servicio);
+                Servicio oldIdServicioOfPlanServicioListPlanServicio = planServicioListPlanServicio.getServicio();
+                planServicioListPlanServicio.setServicio(servicio);
                 planServicioListPlanServicio = em.merge(planServicioListPlanServicio);
                 if (oldIdServicioOfPlanServicioListPlanServicio != null) {
                     oldIdServicioOfPlanServicioListPlanServicio.getPlanServicioList().remove(planServicioListPlanServicio);
@@ -73,7 +75,7 @@ public class ServicioJpaController implements Serializable {
                 }
             }
             em.getTransaction().commit();
-            
+
         } finally {
             if (em != null) {
                 em.close();
@@ -108,14 +110,14 @@ public class ServicioJpaController implements Serializable {
             servicio = em.merge(servicio);
             for (PlanServicio planServicioListOldPlanServicio : planServicioListOld) {
                 if (!planServicioListNew.contains(planServicioListOldPlanServicio)) {
-                    planServicioListOldPlanServicio.setIdServicio(null);
+                    planServicioListOldPlanServicio.setServicio(null);
                     planServicioListOldPlanServicio = em.merge(planServicioListOldPlanServicio);
                 }
             }
             for (PlanServicio planServicioListNewPlanServicio : planServicioListNew) {
                 if (!planServicioListOld.contains(planServicioListNewPlanServicio)) {
-                    Servicio oldIdServicioOfPlanServicioListNewPlanServicio = planServicioListNewPlanServicio.getIdServicio();
-                    planServicioListNewPlanServicio.setIdServicio(servicio);
+                    Servicio oldIdServicioOfPlanServicioListNewPlanServicio = planServicioListNewPlanServicio.getServicio();
+                    planServicioListNewPlanServicio.setServicio(servicio);
                     planServicioListNewPlanServicio = em.merge(planServicioListNewPlanServicio);
                     if (oldIdServicioOfPlanServicioListNewPlanServicio != null && !oldIdServicioOfPlanServicioListNewPlanServicio.equals(servicio)) {
                         oldIdServicioOfPlanServicioListNewPlanServicio.getPlanServicioList().remove(planServicioListNewPlanServicio);
@@ -171,7 +173,7 @@ public class ServicioJpaController implements Serializable {
             }
             List<PlanServicio> planServicioList = servicio.getPlanServicioList();
             for (PlanServicio planServicioListPlanServicio : planServicioList) {
-                planServicioListPlanServicio.setIdServicio(null);
+                planServicioListPlanServicio.setServicio(null);
                 planServicioListPlanServicio = em.merge(planServicioListPlanServicio);
             }
             List<Detalle> detalleList = servicio.getDetalleList();

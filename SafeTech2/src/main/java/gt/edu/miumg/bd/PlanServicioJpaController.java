@@ -21,12 +21,14 @@ import javax.persistence.EntityManagerFactory;
  */
 public class PlanServicioJpaController implements Serializable {
 
+    
+    
     public PlanServicioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
-    public EntityManager getEntityManager() {
+    public EntityManager getEntityManager() {   
         return emf.createEntityManager();
     }
 
@@ -43,10 +45,10 @@ public class PlanServicioJpaController implements Serializable {
                 idCliente = em.getReference(idCliente.getClass(), idCliente.getIdCliente());
                 planServicio.setIdCliente(idCliente);
             }
-            Servicio idServicio = planServicio.getIdServicio();
+            Servicio idServicio = planServicio.getServicio();
             if (idServicio != null) {
                 idServicio = em.getReference(idServicio.getClass(), idServicio.getIdServicio());
-                planServicio.setIdServicio(idServicio);
+                planServicio.setServicio(idServicio);
             }
             List<PlanAgente> attachedPlanAgenteList = new ArrayList<PlanAgente>();
             for (PlanAgente planAgenteListPlanAgenteToAttach : planServicio.getPlanAgenteList()) {
@@ -88,8 +90,8 @@ public class PlanServicioJpaController implements Serializable {
             PlanServicio persistentPlanServicio = em.find(PlanServicio.class, planServicio.getIdPlan());
             Cliente idClienteOld = persistentPlanServicio.getIdCliente();
             Cliente idClienteNew = planServicio.getIdCliente();
-            Servicio idServicioOld = persistentPlanServicio.getIdServicio();
-            Servicio idServicioNew = planServicio.getIdServicio();
+            Servicio idServicioOld = persistentPlanServicio.getServicio();
+            Servicio idServicioNew = planServicio.getServicio();
             List<PlanAgente> planAgenteListOld = persistentPlanServicio.getPlanAgenteList();
             List<PlanAgente> planAgenteListNew = planServicio.getPlanAgenteList();
             if (idClienteNew != null) {
@@ -98,7 +100,7 @@ public class PlanServicioJpaController implements Serializable {
             }
             if (idServicioNew != null) {
                 idServicioNew = em.getReference(idServicioNew.getClass(), idServicioNew.getIdServicio());
-                planServicio.setIdServicio(idServicioNew);
+                planServicio.setServicio(idServicioNew);
             }
             List<PlanAgente> attachedPlanAgenteListNew = new ArrayList<PlanAgente>();
             for (PlanAgente planAgenteListNewPlanAgenteToAttach : planAgenteListNew) {
@@ -175,7 +177,7 @@ public class PlanServicioJpaController implements Serializable {
                 idCliente.getPlanServicioList().remove(planServicio);
                 idCliente = em.merge(idCliente);
             }
-            Servicio idServicio = planServicio.getIdServicio();
+            Servicio idServicio = planServicio.getServicio();
             if (idServicio != null) {
                 idServicio.getPlanServicioList().remove(planServicio);
                 idServicio = em.merge(idServicio);
@@ -239,5 +241,18 @@ public class PlanServicioJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    public List<Servicio> findServiciosByPlan(int idPlan) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.createQuery(
+                    "SELECT psd.idServicio FROM PlanServicioDetalle psd WHERE psd.idPlan.idPlan = :idPlan",
+                    Servicio.class)
+                    .setParameter("idPlan", idPlan)
+                    .getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
 }

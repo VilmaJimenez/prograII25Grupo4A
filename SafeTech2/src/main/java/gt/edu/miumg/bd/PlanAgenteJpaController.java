@@ -20,6 +20,9 @@ import javax.persistence.criteria.Root;
  */
 public class PlanAgenteJpaController implements Serializable {
 
+
+
+    
     public PlanAgenteJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }

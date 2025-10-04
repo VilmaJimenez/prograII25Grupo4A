@@ -5,9 +5,12 @@ import gt.edu.miumg.bd.AgentesDB.AgentesDataBase;
 import gt.edu.miumg.bd.AgentesDB.RolDataBase;
 import gt.edu.miumg.bd.AgentesDB.UsuarioDataBase;
 import gt.edu.miumg.bd.Cliente;
+import gt.edu.miumg.bd.PlanServicio;
 import gt.edu.miumg.bd.Rol;
+import gt.edu.miumg.bd.ServiceDB.FacturaDatBase2;
 import gt.edu.miumg.bd.ServiceDB.ServiceLog;
 import gt.edu.miumg.bd.ServiceDB.ServicioDataBase;
+import gt.edu.miumg.bd.ServiceDB.ServicioDataBase2;
 import gt.edu.miumg.bd.Servicio;
 import gt.edu.miumg.bd.Usuario;
 import gt.edu.miumg.bd.exceptions.NonexistentEntityException;
@@ -22,6 +25,8 @@ public class SafeTech2 {
     static UsuarioDataBase usDB = new UsuarioDataBase();
     static RolDataBase rolDB = new RolDataBase();
     static Rol logu = new Rol();
+    static ServicioDataBase2 svDB2 = new ServicioDataBase2();
+    static FacturaDatBase2 facturaDB = new FacturaDatBase2();
 
     public static void main(String[] args) throws NonexistentEntityException {
         safeTechApp();
@@ -58,7 +63,6 @@ public class SafeTech2 {
             } else {
                 System.out.println("\nUsuario Correcto");
                 logu = logueo.getIdRol();
-                // System.out.println(logueo.getIdRol()+"    5555555555555555555555555555555");
                 //log.getIdRol();
                 return true;
 
@@ -72,7 +76,7 @@ public class SafeTech2 {
     public static int menu() {
 
         if (logu.getIdRol().equals(2)) {
-            
+
             System.out.println("\n***** MENU *****");
             System.out.println("\nPermisos de Ventas:");
             System.out.println("3. Manejo de Planes");
@@ -85,10 +89,11 @@ public class SafeTech2 {
             System.out.println("1. Mantenimiento de Servicios");
             System.out.println("2. Mantenimiento de Clientes");
             System.out.println("3. Manejo de Planes");
-            System.out.println("4. Agentes");
-            System.out.println("5. Usuario");
-            System.out.println("6. Rol");
-            System.out.println("7. Salir");
+            System.out.println("4. Manejo de Facturas");
+            System.out.println("5. Agentes");
+            System.out.println("6. Usuario");
+            System.out.println("7. Rol");
+            System.out.println("8. Salir");
             System.out.print("Seleccione una opcion: ");
             return es.nextInt();
         }
@@ -104,12 +109,14 @@ public class SafeTech2 {
             case 3:
                 return subMenuPlanes();
             case 4:
-                return subMenuAgentes();
+                return subMenuFacturas();
             case 5:
-                return subMenuUsuario();
+                return subMenuAgentes();
             case 6:
-                return subMenuRol();
+                return subMenuUsuario();
             case 7:
+                return subMenuRol();
+            case 8:
                 System.out.println("\nSaliendo del programa...");
                 return true;
             default:
@@ -204,7 +211,7 @@ public class SafeTech2 {
         return false;
     }
 
-    public static boolean subMenuPlanes() {
+    public static boolean subMenuPlanesAnt() {
         boolean regresar = false;
 
         while (!regresar) {
@@ -221,7 +228,7 @@ public class SafeTech2 {
             switch (op) {
                 case 1:
                     System.out.println("\n***** Crear un Plan *****");
-                    svDB.crearPlanServicio(es);
+                    // svDB.crearPlanServicio(es);
                     break;
                 case 2:
                     System.out.println("\n***** Eliminar un Plan *****");
@@ -243,6 +250,76 @@ public class SafeTech2 {
                     System.out.println("Número incorrecto");
             }
         }
+        return false;
+    }
+
+    public static boolean subMenuPlanes() {
+        boolean regresar = false;
+
+        while (!regresar) {
+            System.out.println("\n*** MANEJO DE PLANES ***");
+            System.out.println("1. Crear Plan");
+            System.out.println("2. Eliminar Plan");
+            System.out.println("3. Modificar Plan");
+            System.out.println("4. Ver Planes");
+            System.out.println("5. Volver al Menú Principal");
+
+            int op = leerEntero("Seleccione una Opcion: ");
+
+            switch (op) {
+                case 1:
+                    PlanServicio plan = null;
+                    try {
+                        plan = svDB2.crearPlanServicio(es);
+                    } catch (Exception e) {
+                        System.out.println("Error creando plan: " + e.getMessage());
+                    }
+
+                    if (plan != null) {
+                        System.out.print("¿Desea generar una factura para este plan? (s/n): ");
+                        String respuesta = es.nextLine().trim();
+
+                        if (respuesta.equalsIgnoreCase("s")) {
+                            try {
+                                Servicio servicioDelPlan = plan.getServicio();
+                                facturaDB.crearFacturaConServicio(es, servicioDelPlan);
+                            } catch (Exception e) {
+                                System.out.println("Error generando factura para el plan: " + e.getMessage());
+                            }
+                        }
+                    }
+                    break;
+
+                case 2:
+                        try {
+                    svDB2.eliminarPlanServicio(es);
+                } catch (Exception e) {
+                    System.out.println("Error eliminando plan: " + e.getMessage());
+                }
+                break;
+                case 3:
+                        try {
+                    svDB2.modificarPlanServicio(es);
+                } catch (Exception e) {
+                    System.out.println("Error modificando plan: " + e.getMessage());
+                }
+                break;
+                case 4:
+                        try {
+                    svDB2.mostrarPlanes();
+                } catch (Exception e) {
+                    System.out.println("Error mostrando planes: " + e.getMessage());
+                }
+                break;
+                case 5:
+                    System.out.println("Volviendo al menú principal...");
+                    regresar = true;
+                    break;
+                default:
+                    System.out.println("Número incorrecto");
+            }
+        }
+
         return false;
     }
 
@@ -376,6 +453,58 @@ public class SafeTech2 {
                 default:
                     System.out.println("Opción inválida");
                     break;
+            }
+        }
+        return false;
+    }
+
+    public static int leerEntero(String prompt) {
+        while (true) {
+            try {
+                System.out.print(prompt);
+                String input = es.nextLine().trim();
+                int val = Integer.parseInt(input);
+                return val;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese un número válido por favor.");
+            } catch (Exception e) {
+                System.out.println("Entrada no válida: " + e.getMessage());
+            }
+        }
+    }
+
+    public static boolean subMenuFacturas() {
+        boolean regresar = false;
+
+        while (!regresar) {
+            System.out.println("\n*** MANEJO DE FACTURAS ***");
+            System.out.println("1. Crear Factura");
+            System.out.println("2. Ver Facturas");  // ← Se convierte en opción 2
+            System.out.println("3. Volver al Menú Principal"); // ← Se convierte en opción 3
+
+            int op = leerEntero("Seleccione una Opcion: ");
+
+            switch (op) {
+                case 1:
+                try {
+                    facturaDB.crearFactura(es);
+                } catch (Exception e) {
+                    System.out.println("Error creando factura: " + e.getMessage());
+                }
+                break;
+                case 2:
+                try {
+                    facturaDB.mostrarFacturas();
+                } catch (Exception e) {
+                    System.out.println("Error mostrando facturas: " + e.getMessage());
+                }
+                break;
+                case 3:
+                    System.out.println("Volviendo al menú principal...");
+                    regresar = true;
+                    break;
+                default:
+                    System.out.println("Número incorrecto");
             }
         }
         return false;
